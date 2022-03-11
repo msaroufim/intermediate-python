@@ -201,3 +201,10 @@ Classes are all created by a meta class
 3. Get a wheel file that you then upload with twine upload
 
 An alternative is to use `poetry add, poetry build, poetry publish`
+
+## Frame vs stack
+https://stackoverflow.com/a/23849060
+
+## Suggestions from Discord
+* Why can't Python have an operator that implies passing a variable by value to a function? The only way that I know is copy.deepcopy(x)
+* What I would have liked to know earlier and only figured out after more docs than I should need to: packaging code for pip/conda, generators, metaclasses (and a good example of where they may be useful or not), fastest/best way to load and handle large files.
