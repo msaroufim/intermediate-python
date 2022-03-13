@@ -30,15 +30,23 @@ def int_adder(a,b):
 def float_adder(a,b):
     c = call_c++_function(a, b)
 
-def general_adder(a,b):
+def general_adder(a : Numeric, b : Numeric):
     type_of_a = type(a)
     c = Dispatcher.type_of_a(a,b)
     return c
+
+class Numeric(Enum):
+    float
+    int
+    long 
 ```
 
 You can then use this type to create more complex types using dataclasses
 
 ```python
+from dataclasses import dataclass
+
+@dataclass
 class Context:
     name : str,
     code : int,
@@ -110,3 +118,33 @@ If from scratch use types and tests early and package your app as early as possi
 If you're contributing to an existing project - do not submit a single PR that types and lints the entire codebase - noone will approve it. You have two ways of doing it
 1. Find the longest files in a repo -> you can run `cloc .` to get a list
 2. Find the files that are changed most often because that's where safety is more important `git log --name-only --pretty="format:" | sed '/^\s*$/'d | sort | uniq -c | sort -r | head`
+
+
+## Cool ideas
+
+Other interesting type systems in Python are multiple dispath in FastCore
+@overload where you can create conditional type systems to say something like if input is of type int then output is of type list of int but if input is of type list then output is of ype string
+
+
+How to implement a typed system for numerical linear algebra
+
+```python
+
+# Scenario 1
+a = torch.randn(50,100)
+b = torch.randn(50,50)
+a * b -> should give a type error
+
+
+# Scenario 2 is 
+
+class Model(torch.nn.Module):
+    def __init__(self):
+        ...
+    
+    def forward(self, a : Tensor[-1, 50]): # first input is of arbitrary dimension because it's a batch size and second dimension = 50 to make the matrix math work out
+        # do the math
+
+```
+
+Maybe do another stream on this https://github.com/patrick-kidger/torchtyping
