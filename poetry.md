@@ -6,7 +6,7 @@ An alternative I've enjoyed far more for smaller new projects like `torchprep` i
 
 ```sh
 # Create package directory, tests and README
-poetry create my_package
+poetry new my_package
 
 # Setup package name, owner and version
 poetry init
